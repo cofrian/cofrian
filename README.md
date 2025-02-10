@@ -1,16 +1,16 @@
-## Hi there 👋
+<div align="center">
+  
+# 💻 Data Science Enthusiast | Machine Learning | Business & Cybersecurity  
 
-<!--
-**cofrian/cofrian** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+<h1 align="center">Hola, soy Sergio Ortiz 👋</h1>
+</div>
+<img scr = <img src="https://i.imgur.com/weNbhGZ.png">
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin&style=for-the-badge)](https://es.linkedin.com/in/sergio-ortiz-montesinos)
+[![Gmail](https://img.shields.io/badge/Email-Gmail-red?logo=gmail&style=for-the-badge)](mailto:scofrian@gmail.com)
 
-Here are some ideas to get you started:
+### 🚀 About Me  
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+I'm a **Data Science student** passionate about **Machine Learning, Business Analytics, and Cybersecurity**. I love exploring data, building predictive models, and creating insightful visualizations.  
+
+### 📫 Let's Connect!  
+
