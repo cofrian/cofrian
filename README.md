@@ -1,7 +1,7 @@
 <h1 align="center">Hi, I'm Sergio Ortiz <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="35"></h1>
 
 <p align="center">
-  <img src="https://github.com/cofrian/cofrian/blob/f7470ff26a9ae39a97799442879d55f98dba9db6/Banner_Sergio_Ortiz.png" width="800">
+  <img src="https://github.com/cofrian/cofrian/blob/f7470ff26a9ae39a97799442879d55f98dba9db6/Banner_Sergio_Ortiz.png" width="1000">
 </p>
 
 <p align="center">
