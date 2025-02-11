@@ -33,7 +33,7 @@
 
 ## 🌍 Connect with Me  
 <p align="center">
-  <a href="www.linkedin.com/in/sergioortizmontesinos">
+  <a href="www.linkedin.com/in/sergioortizmontesinos/">
     <img src="https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin&style=for-the-badge">
   </a>
   <a href="mailto:scofrian@gmail.com">
