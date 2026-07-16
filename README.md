@@ -127,7 +127,7 @@ The write-up is also honest about what failed: Task 2.3 ranks 10th of 118 on sof
 
 <h3><a href="https://github.com/cofrian/upv-earth-planetary-boundaries">UPV-EARTH — Mapping University Research onto the Planetary Boundaries</a></h3>
 <p>
-Classifies <b>31,634 scientific abstracts</b> against the nine <b>Planetary Boundaries</b> — the Earth-system processes that bound a safe operating space for humanity, six of which have already been transgressed. Institutions increasingly have to evidence their environmental contribution, and "we publish on sustainability" is not evidence. The useful question is <i>which Earth-system processes does this research actually study?</i>
+Classifies <b>31,634 scientific abstracts</b> against the nine <b>Planetary Boundaries</b> — the Earth-system processes that bound a safe operating space for humanity, six of which have already been transgressed. Institutions increasingly have to evidence their environmental contribution, and "we publish on sustainability" is not evidence. The useful question is <i>which Earth-system processes does this research actually study?</i> Graded <b>9.9/10</b>.
 </p>
 <p>
 That question is harder than it looks, and the whole project is built around why: a paper can be <i>about</i> sustainability without studying a boundary, and can advance one without ever using SDG language. Words like <i>climate</i> or <i>water</i> routinely appear as background or motivation, not as the thing being measured. Keyword matching over-fires; a naive LLM is worse, happily labelling anything that sounds green. Every design decision is a trade between <b>positivity bias</b> (inflating the university's apparent contribution) and <b>false negatives</b> (understating real strengths).
