@@ -65,6 +65,7 @@ I am also expanding my engineering stack through cloud-based workflows and tooli
   <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white">
   <img src="https://img.shields.io/badge/Keras-D00000?style=for-the-badge&logo=keras&logoColor=white">
   <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white">
+  <img src="https://img.shields.io/badge/CatBoost-FFCC00?style=for-the-badge&logoColor=black" alt="CatBoost">
 </p>
 
 <h3>Databases, Data Systems & Backend</h3>
@@ -73,8 +74,10 @@ I am also expanding my engineering stack through cloud-based workflows and tooli
   <img src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white">
   <img src="https://img.shields.io/badge/Oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white">
   <img src="https://img.shields.io/badge/Neo4j-4581C3?style=for-the-badge&logo=neo4j&logoColor=white">
+  <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white">
   <img src="https://img.shields.io/badge/Jinja-B41717?style=for-the-badge&logo=jinja&logoColor=white">
   <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white">
+  <img src="https://img.shields.io/badge/Shiny-447099?style=for-the-badge&logo=posit&logoColor=white">
 </p>
 
 <h3>Cloud, Engineering & MLOps</h3>
@@ -101,29 +104,119 @@ I am also expanding my engineering stack through cloud-based workflows and tooli
 
 <h2>Selected Projects</h2>
 
-<h3>AION — Real-Time Emergency Routing</h3>
+<h3>
+  <a href="https://github.com/cofrian/exist2026-ordantis">GEMF — Multimodal Sexism Characterization in Memes</a>
+  <img src="https://img.shields.io/badge/EXIST_2026-Ranked_%231-gold?style=flat-square" align="right">
+</h3>
 <p>
-Integrated traffic, weather, news, events, and social signals into a predictive pipeline for dynamic routing and city-state modeling under changing urban conditions.
+<b>Best-ranked system at EXIST 2026 Task 2 (CLEF 2026)</b>, with three first places on the official leaderboards — 1st of 144 in binary sexism detection, and 1st of 117 and 1st of 186 in source-intention classification, topping Spanish and English simultaneously.
+</p>
+<p>
+The core idea is to use <b>Gemini as a semantic mediator rather than a black-box classifier</b>. A meme is not one signal but two that only mean something together — an image and its text, where the sexism often lives in the tension between them. So each meme is interpreted offline into structured text (description, sexism analysis, reasoning, intention and irony cues, zero-shot probabilities), and that text is concatenated with the OCR, encoded with <b>XLM-RoBERTa</b> or a multilingual <b>Longformer</b>, and fused with <b>EEG</b> and <b>Ekman emotion</b> features before a probabilistic decision.
+</p>
+<p>
+That single choice — letting the LLM translate rather than judge — lifted Task 2.1 validation AUC from <b>0.741 with a raw ViT to 0.880</b>, the largest gain anywhere in the pipeline. Two other decisions carried the result: training on the <b>empirical distribution of the six annotators</b> instead of majority labels (Learning with Disagreement), justified by a mixed-effects analysis showing annotator demographics significantly shape sexism perception; and a fixed <b>0.6·model + 0.4·Gemini</b> probability blend that produced the #1 runs outright.
+</p>
+<p>
+The write-up is also honest about what failed: Task 2.3 ranks 10th of 118 on soft evaluation but 132nd of 187 on hard, and the paper diagnoses the gap as validation-overfit category thresholds and unmodeled label co-occurrence — not the model.
+</p>
+<p>
+📄 <a href="https://github.com/cofrian/exist2026-ordantis/blob/main/paper/paper_562.pdf">Paper (CLEF 2026 Working Notes)</a><br>
+<i>Python · Gemini · XLM-RoBERTa · Longformer · multimodal fusion · soft-label training</i>
 </p>
 
-<h3>NOBIL Data — Real-Time EV Charging Data Pipeline</h3>
+<h3><a href="https://github.com/cofrian/upv-earth-planetary-boundaries">UPV-EARTH — Mapping University Research onto the Planetary Boundaries</a></h3>
 <p>
-Built a real-time data pipeline for NOBIL EV charging events, ingesting websocket data, normalizing key fields, storing hourly JSONL event logs, generating JSON snapshots, and automating versioned uploads to GitHub with optional incremental storage in Google Cloud Storage.
+Classifies <b>31,634 scientific abstracts</b> against the nine <b>Planetary Boundaries</b> — the Earth-system processes that bound a safe operating space for humanity, six of which have already been transgressed. Institutions increasingly have to evidence their environmental contribution, and "we publish on sustainability" is not evidence. The useful question is <i>which Earth-system processes does this research actually study?</i>
+</p>
+<p>
+That question is harder than it looks, and the whole project is built around why: a paper can be <i>about</i> sustainability without studying a boundary, and can advance one without ever using SDG language. Words like <i>climate</i> or <i>water</i> routinely appear as background or motivation, not as the thing being measured. Keyword matching over-fires; a naive LLM is worse, happily labelling anything that sounds green. Every design decision is a trade between <b>positivity bias</b> (inflating the university's apparent contribution) and <b>false negatives</b> (understating real strengths).
+</p>
+<p>
+Three findings make it worth reading. <b>TF-IDF beats every transformer</b> (F1 0.61 vs SPECTER's 0.51) — because abstracts state PB terminology explicitly and the PB reference documents are themselves keyword lists, so TF-IDF compares two representations of the same nature. <b>Model choice went to Qwen 2.5 14B, not the most accurate one</b>: Llama 3.1 8B had higher agreement but 0.00% rigorousness — it never rejected irrelevant documents, disqualifying for institutional mapping. And <b>prompt engineering beat model size</b>: the v4 "operational object" principle — classify by the variable the abstract actually measures, not by its narrative framing — raised Top-1 from 63.3% to <b>72.1%</b> without returning to earlier versions' permissiveness, correcting 15 documents against v3's 4 in a paired comparison.
+</p>
+<p>
+The auditable agent cascade is reported as it performed: it <b>does not beat</b> the single model, trading ~1 point of Top-1 for traces a human can review. Ships as a containerized platform (FastAPI + Next.js + Nginx, <code>docker compose up</code>, no GPU) with precomputed embeddings and an optional local RAG chatbot.
+</p>
+<p><i>Python · Qwen 2.5 / Ollama · SPECTER2 · TF-IDF · agent cascade · FastAPI · Next.js · Docker</i></p>
+
+<h3><a href="https://github.com/cofrian/urbanflow-valencia-mlops">UrbanFlow Valencia — Traffic Prediction & Facility Siting</a></h3>
+<p>
+Decision-support tool for Valencia City Council, and a <b>full MLOps cycle end to end</b> — graded <b>10/10</b>. <b>24 CatBoost models</b> (one per hour of the day) predict traffic across <b>1,158 measurement zones</b>, while an independent <b>integer-programming optimizer</b> (PuLP/CBC) picks where to place sports centres, health centres or bike stations to maximize population coverage under a real budget.
+</p>
+<p>
+The interesting part isn't the model — it's everything around it. A model doesn't end at evaluation: it has to ship as a service, publish itself automatically, and be observable once it's running. So the repository implements the <b>full CRISP-DM cycle</b> with the emphasis on the phases academic projects usually skip. FastAPI on Hugging Face, Next.js on Vercel, CI/CD through GitHub Actions, and a monitoring module that computes MAE per hour, raises alerts past a configurable threshold, and flags zones with systematic error — so degradation surfaces without anyone inspecting it by hand.
+</p>
+<p>
+Validation is deliberately strict (temporal hold-out on days 25–31, never a random split), and the app pulls live data from Valenbisi, EMT buses, City Council traffic status and AEMET/Open-Meteo weather.
+</p>
+<p>
+🔗 <a href="https://edm-project.vercel.app">Live demo</a> · <a href="https://cofrian-edm-proyect.hf.space/docs">API docs</a><br>
+<i>Python · FastAPI · CatBoost · PuLP/CBC · Next.js · TypeScript · Docker · GitHub Actions · Vercel · Hugging Face</i>
 </p>
 
-<h3>ExamBox — Docker-Based Exam Environment</h3>
+<h3><a href="https://github.com/cofrian/aion-emergency-routing-valencia">AION — Predictive Traffic & Emergency Routing for València</a></h3>
 <p>
-Developed a LAN-based exam platform using Docker, FastAPI, and JupyterLab, where each student works in an isolated container while the instructor manages the exam through a live dashboard. The system includes centralized submissions, timed sessions, question unlocking, and internal-network isolation.
+Extreme congestion <b>physically blocks emergency vehicles</b>, and the cost is measurable: the golden minutes are lost, a trapped unit is a failed emergency, and fleet availability drops as the bottleneck propagates. The founding idea is one sentence — <i>predict traffic so that emergency services don't have to deal with traffic jams</i>.
+</p>
+<p>
+The gap AION fills is that commercial navigation apps are <b>reactive</b>: they see traffic only while the app is open, and they're blind to a concert that ends at 23:00 or roadworks announced yesterday. AION instead reads the city's recorded sensor history and models the road itself — type, speed limit, direction, width, lane count — on the premise that raw intensity isn't comparable across streets. It predicts per <b>zone × hour</b> at a 30–120 minute horizon, targeting <b>deviation from normality</b> rather than absolute volume.
+</p>
+<p>
+A robust baseline paired with PCA embeddings, <b>CatBoost</b> and a sigmoid shrink step — which keeps it stable in low-signal hours without flattening the peaks — reaches <b>R² 0.971 · MAE 44.5 veh/h · RMSE 93.9 · sMAPE 17.4%</b>. Feeding it is an <b>LLM pipeline (LLaMA 3 via Ollama)</b> that filters scraped local news, city agendas and social posts for traffic relevance, then turns the survivors into structured events with severity, cause, entities, time window and geocoding — the part that lets the model know Fallas is starting.
+</p>
+<p>
+Capstone of the <b>University Extension Diploma in AI (467h)</b> — Samsung Innovation Campus · EOI.
+</p>
+<p><i>Python · CatBoost · LLaMA 3 / Ollama · MongoDB · Streamlit · scraping &amp; ETL</i></p>
+
+<hr>
+
+<h3>Also worth a look</h3>
+
+<h4>
+  <a href="https://github.com/cofrian/outfit-ai-recommender">Outfit AI Recommender</a> — multimodal fashion discovery
+  <img src="https://img.shields.io/badge/GenAI_Maverick_2025-Winner-FFD700?style=flat-square" align="right">
+</h4>
+<p>
+<b>Winner of the Retail &amp; Fashion challenge at Accenture Spain's GenAI Maverick 2025.</b> Finds catalogue items from a sentence, a garment photo, a full outfit (segmented and matched piece by piece) or just a situation — <i>"an outdoor wedding in June"</i> — which isn't a garment description at all and needs its own path through the system.<br>
+<i>FastAPI · FAISS · BLIP · SegFormer</i>
 </p>
 
-<h3>Urban Analytics</h3>
+<h4><a href="https://github.com/cofrian/genaq-market-selection">GENAQ</a> — market selection for atmospheric water generators</h4>
 <p>
-Analyzed pollution, traffic, weather, and housing data to identify urban patterns and generate actionable insights through data analysis and statistical reasoning.
+Ranks Spain's <b>35,891 census sections</b> to find the 50 best places to launch a machine that makes drinking water out of air. The catch: <b>no label exists</b> — nobody has sold this to a Spanish household — so the target has to be argued from first principles rather than trained. Bankinter Akademia 2025 case study for <a href="https://www.genaq.com/">GENAQ</a>.<br>
+<i>Python · INE census &amp; climate data · composite scoring</i>
 </p>
 
-<h3>Python Automation</h3>
+<h4><a href="https://github.com/cofrian/Exam_Box">ExamBox</a> — self-hosted Docker exam platform</h4>
 <p>
-Automated internal processes, reporting workflows, and data transformations with a focus on reliability, maintainability, and operational efficiency.
+Runs practical programming exams on a LAN by <b>making the environment part of the exam</b>: a pinned Docker image, so no install fails mid-exam and no submission has to be reconstructed to grade it. FastAPI manager with live dashboard and progressive question unlocking; students get browser-based JupyterLab and zero setup. Graded <b>10/10</b>.<br>
+<i>Python · FastAPI · Docker Compose · JupyterLab</i>
+</p>
+
+<h4><a href="https://github.com/cofrian/nba-scouting-analytics">NBA Scouting Analytics</a></h4>
+<p>
+All <b>508 players of the 2022–23 season</b> through PCA + k-means to find who can replace whom, and PLS-DA that catches <b>100% of All-Stars at 95% specificity</b>. The best result is a failure: its "false" positives are players the stats say deserved selection but the fan vote didn't give it to.<br>
+<i>R · R Markdown · PCA · k-means · PLS-DA</i>
+</p>
+
+<h4><a href="https://github.com/cofrian/covid19-wealth-mortality">COVID-19 — Did Money Buy Survival?</a></h4>
+<p>
+Six visualizations over a <b>189-country × 366-day panel</b>, and an uncomfortable 2020 answer: wealth correlates with <i>more</i> deaths per capita (ρ +0.49), not fewer — largely a detection effect, since richer countries tested more. Built to generate hypotheses, not settle them.<br>
+<i>Python · Shiny for Python · Plotly</i>
+</p>
+
+<h4><a href="https://github.com/cofrian/nobil_data">NOBIL Data</a> — real-time EV charging pipeline</h4>
+<p>
+Websocket ingestion of NOBIL charging events into hourly-rotated JSONL with periodic snapshots, derived real-time metrics (status transitions, dwell time, event lag, duplicate detection) and automated versioned sync to GitHub and Google Cloud Storage.<br>
+<i>Python · websockets · Git automation · GCS</i>
+</p>
+
+<h4><a href="https://github.com/cofrian/Proyecto_fitplanner">FitPlanner</a></h4>
+<p>
+Streamlit app answering <i>"what do I train, what do I eat, and what should I buy?"</i> from one form — Harris-Benedict calorie targets, <b>112 scraped routines</b>, weekly menus with macros via Spoonacular, and supplements fuzzy-matched against a <b>5,023-product</b> Decathlon catalogue.<br>
+<i>Python · Streamlit · BeautifulSoup · REST APIs</i>
 </p>
 
 <hr>
